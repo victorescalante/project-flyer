@@ -8,8 +8,7 @@
     <h1>Selling Your Home?</h1>
 
     <hr>
-    <div class="row">
-        <form method="POST" action="{{ route('flyers.store') }}" enctype="multipart/form-data" class="col-md-6">
+        <form method="POST" action="{{ route('flyers.store') }}" enctype="multipart/form-data">
 
             @include('flyers.form')
 
@@ -25,7 +24,7 @@
             @endif
 
         </form>
-    </div>
+
 
 
 @endsection

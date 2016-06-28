@@ -2,19 +2,42 @@
 
 @section('content')
 
-    <h1>{{ $flyer->street }}</h1>
+    <div class="row">
 
-    <h2>{{ $flyer->price }}</h2>
+        <div class="col-md-5">
 
-    <hr>
+            <h1>{{ $flyer->street }}</h1>
 
-    <div class="description">
-        {!! nl2br($flyer->description) !!}
+            <h2>{{ $flyer->price }}</h2>
+
+            <hr>
+
+            <div class="description">
+
+                {!! nl2br($flyer->description) !!}
+
+            </div>
+
+        </div>
+
+        <div class="col-md-7">
+
+        </div>
+
+        <div class="col-md-12">
+
+            <hr>
+
+            <form id="addPhotoForm" action="{{ route('upload_post_photo',[$flyer->zip,$flyer->street]) }}" method="POST" class="dropzone">
+
+                {{ csrf_field() }}
+
+            </form>
+
+        </div>
+
     </div>
 
-    <form id="addPhotoForm" action="/{{ $flyer->zip }}/{{ $flyer->street }}/photos" method="POST" class="dropzone">
-        {{ csrf_field() }}
-    </form>
 
 @endsection
 

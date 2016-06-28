@@ -1,85 +1,93 @@
 @inject('countries','App\Http\Utilities\Country')
 
-{{ csrf_field() }}
+<div class="row">
+    {{ csrf_field() }}
 
-<div class="form-group">
+    <div class="col-md-6">
 
-    <label for="street">Street:</label>
+        <div class="form-group">
 
-    <input type="text" name="street" class="form-control" value="{{ old('street') }}" required>
+            <label for="street">Street:</label>
 
-</div>
+            <input type="text" name="street" class="form-control" value="{{ old('street') }}" required>
 
-<div class="form-group">
+        </div>
 
-    <label for="city">City:</label>
+        <div class="form-group">
 
-    <input type="text" name="city" class="form-control" value="{{ old('city') }}" required>
+            <label for="city">City:</label>
 
-</div>
+            <input type="text" name="city" class="form-control" value="{{ old('city') }}" required>
 
-<div class="form-group">
+        </div>
 
-    <label for="zip">Zip/Postal Code:</label>
+        <div class="form-group">
 
-    <input type="text" name="zip" class="form-control" value="{{ old('zip') }}" required>
+            <label for="zip">Zip/Postal Code:</label>
 
-</div>
+            <input type="text" name="zip" class="form-control" value="{{ old('zip') }}" required>
 
-<div class="form-group">
+        </div>
 
-    <label for="country">Country:</label>
+        <div class="form-group">
 
-    <select id="country" name="country" class="form-control" value="{{ old('country') }}" required>
+            <label for="country">Country:</label>
 
-        @foreach($countries::all() as $country => $code)
+            <select id="country" name="country" class="form-control" value="{{ old('country') }}" required>
 
-            <option value="{{$code}}">{{$country}}</option>
+                @foreach($countries::all() as $country => $code)
 
-        @endforeach
+                    <option value="{{$code}}">{{$country}}</option>
 
-    </select>
+                @endforeach
 
-</div>
+            </select>
 
-<div class="form-group">
+        </div>
 
-    <label for="state">State:</label>
+        <div class="form-group">
 
-    <input type="text" name="state" class="form-control" value="{{ old('state') }}" required>
+            <label for="state">State:</label>
 
-</div>
+            <input type="text" name="state" class="form-control" value="{{ old('state') }}" required>
 
-<hr>
+        </div>
 
-<div class="form-group">
+    </div>
 
-    <label for="price">Price:</label>
+    <div class="col-md-6">
 
-    <input id="text" name="price" class="form-control" value="{{ old('price') }}" required>
+        <div class="form-group">
 
-</div>
+            <label for="price">Price:</label>
 
-<div class="form-group">
+            <input id="text" name="price" class="form-control" value="{{ old('price') }}" required>
 
-    <label for="description">Home Description:</label>
+        </div>
+
+        <div class="form-group">
+
+            <label for="description">Home Description:</label>
 
             <textarea name="description" class="form-control" rows="10" required>{{ old('description') }}</textarea>
 
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+
+        <hr>
+
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary"> Create Flyer</button>
+
+        </div>
+
+    </div>
+
+
+
 </div>
 
-<!--
-<div class="form-group">
-
-    <label for="photos">Photos:</label>
-
-    <input type="file" name="photos" class="form-control" value="{{ old('photos') }}">
-
-</div>
--->
-
-<div class="form-group">
-
-    <button type="submit" class="btn btn-primary"> Create Flyer</button>
-
-</div>
