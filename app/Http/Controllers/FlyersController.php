@@ -4,17 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Flyer;
 use App\Photo;
-use Illuminate\Http\UploadedFile;
 use App\Http\Flash;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Traits\AutorizesUsers;
 use App\Http\Requests\FlyerRequest;
 
 class FlyersController extends Controller {
 
+    use AutorizesUsers;
+
     public function __construct()
     {
-        $this->middleware('auth',['except' => ['show']]);
+        $this->middleware('auth', ['except' => ['show']]);
+
+        parent::__construct();
     }
 
     /**
@@ -41,15 +44,15 @@ class FlyersController extends Controller {
      * @param FlyerRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(FlyerRequest $request, Flash $flash)
+    public function store(FlyerRequest $request)
     {
-        // persist the Flyer
-
-        Flyer::create($request->all());
+        $flyer = $this->user->publish(
+          new Flyer($request->all())
+        );
 
         flash()->success('Success!', 'Your flyer been created.');
 
-        return redirect()->back();
+        return redirect(flyer_path($flyer));
 
     }
 
@@ -67,39 +70,8 @@ class FlyersController extends Controller {
         return view('flyers.show', compact('flyer'));
 
     }
+    
 
-    /**
-     * @param $zip
-     * @param $street
-     * @param Request $request
-     * @return string
-     */
-
-    public function addPhoto($zip, $street,Request $request)
-    {
-
-        $this->validate($request, [
-            'photo' => 'required|mimes:jpg,jpeg,png,bmp'
-        ]);
-        
-        var_dump($request);
-
-        $photo = $this->makePhoto($request->file('photo'));
-
-        Flyer::locatedAt($zip, $street)->addPhoto($photo);
-
-        return 'Done';
-    }
-
-    protected function makePhoto(UploadedFile $file){
-
-        var_dump($file);
-
-        return  Photo::named($file->getClientOriginalName())
-            ->move($file);
-
-
-    }
 
     /**
      * Show the form for editing the specified resource.

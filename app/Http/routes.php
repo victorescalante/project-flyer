@@ -11,18 +11,12 @@
 |
 */
 
-Route::get('/', function ()
-{
-    return view('pages.home');
-});
+Route::get('/','PagesController@home');
 
 
 Route::resource('flyers', 'FlyersController');
 Route::get('{zip}/{street}', 'FlyersController@show');
-Route::post('{zip}/{street}/photos', [
-    'as'   => 'upload_post_photo',
-    'uses' => 'FlyersController@addPhoto'
-]);
+Route::post('{zip}/{street}/photos','PhotosController@store')->name('upload_post_photo');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

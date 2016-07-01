@@ -5736,6 +5736,9 @@ button.close {
 body {
   padding-top: 70px; }
 
+.gallery_image {
+  margin-bottom: 1em; }
+
 .form-control {
   height: 39px; }
 
